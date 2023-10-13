@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Category, Post
 
 # Register your models here.
@@ -6,7 +7,14 @@ from .models import Category, Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["title", "author", "status"]
+    list_display = [
+        "title",
+        "author",
+        "category",
+        "created",
+        "modified",
+        "status",
+    ]
 
 
 @admin.register(Category)
