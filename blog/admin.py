@@ -15,6 +15,10 @@ class PostAdmin(admin.ModelAdmin):
         "modified",
         "status",
     ]
+    prepopulated_fields = {
+        "slug": ["title"],
+    }
+    list_filter = ["status"]
 
 
 @admin.register(Category)

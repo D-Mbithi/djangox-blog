@@ -21,7 +21,8 @@ class Post(TimeStampedModel):
     STATUSCHOICE = (("d", "Draft"), ("p", "Published"))
 
     uuid = UUIDField(primary_key=True, version=4, editable=False)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=120)
     post = models.TextField()
     image = models.ImageField(upload_to="blog/", blank=True)
     status = models.CharField(
@@ -49,7 +50,7 @@ class Post(TimeStampedModel):
         return str(self.title)
 
     def get_absolute_url(self):
-        return reverse("blog:post_detail", kwargs={"post_id": self.uuid})
+        return reverse("blog:post_detail", kwargs={"slug": self.slug})
 
 
 class Category(TimeStampedModel):

@@ -10,7 +10,7 @@ from .models import Post
 
 def post_list(request):
     """Get all blog post."""
-    qs = Post.objects.all()
+    qs = Post.objects.filter(status="p")
 
     paginator = Paginator(qs, 10)
     page_number = request.GET.get("page")
@@ -23,9 +23,9 @@ def post_list(request):
     return render(request, template, context)
 
 
-def post_detail(request, post_id):
+def post_detail(request, slug):
     """Get blog post by Id."""
-    post = get_object_or_404(Post, uuid=post_id)
+    post = get_object_or_404(Post, slug=slug)
     template = "blog/single.html"
     context = {"post": post}
 
@@ -48,9 +48,9 @@ def post_create(request):
     return render(request, template, context)
 
 
-def post_update(request, post_id):
+def post_update(request, slug):
     """Update blog post by Id."""
-    post = get_object_or_404(Post, id=post_id)
+    post = get_object_or_404(Post, slug=slug)
 
     if request.method == "POST":
         form = PostForm()
@@ -66,9 +66,9 @@ def post_update(request, post_id):
     return render(request, template, context)
 
 
-def post_delete(request, post_id):
+def post_delete(request, slug):
     """Get blog post by Id."""
-    post = get_object_or_404(Post, id=post_id)
+    post = get_object_or_404(Post, slug=slug)
     post.delete()
 
     return redirect(reverse("blog:post_list"))
