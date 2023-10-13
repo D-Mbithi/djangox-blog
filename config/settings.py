@@ -5,7 +5,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-SECRET_KEY
-SECRET_KEY = "django-insecure-0peo@#x9jur3!h$ryje!$879xww8y1y66jx!%*#ymhg&jkozs2"
+SECRET_KEY = "django-0peo@#x9jur3!h$ryje!$879xww8y1y66jx!%*#ymhg&jkozs2"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = True
@@ -30,10 +30,13 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "debug_toolbar",
     "taggit",
+    "django_extensions",
+    "imagekit",
     # Local
     "accounts",
     "pages",
     "blog",
+    "comments",
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
@@ -81,7 +84,7 @@ if socket.gethostname() == "pop-os":
         }
     }
 else:
-    # For Docker/PostgreSQL usage uncomment this and comment the DATABASES config above
+    # Docker/PostgreSQL usage uncomment this and comment the DATABASES config
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -96,16 +99,16 @@ else:
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa: E501
     },
 ]
 
@@ -178,3 +181,12 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 # Setting tags case insensitive
 TAGGIT_CASE_INSENSITIVE = True
+
+
+# Media files configuration
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+
+# images upload optimization
+OPTIMIZED_IMAGE_METHOD = "pillow"
