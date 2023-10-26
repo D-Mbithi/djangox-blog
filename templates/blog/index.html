@@ -1,5 +1,5 @@
 {% extends "../base/base.html" %}
-{% block title %}Index Page{% endblock %}
+{% block title %}Home Page{% endblock %}
 
 {% block template %}
 {% include "../base/navbar.html"%}
@@ -15,11 +15,10 @@
         <div class="d-none d-lg-block col-4">
 
              {# {% sidebar_tag_cloud %} #}
-            {% include 'base/footer.html' %}
+            {% comment %} {% include 'base/footer.html' %} {% endcomment %}
 
         </div>
     </div>
 </div>
-
 
 {% endblock %}

@@ -1,28 +1,41 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg py-3 border-bottom">
     <div class="container">
 
         <a class="navbar-brand logo fs-3" href="#">djblogger</a>
-
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-            </ul>
-
-            <form method="get" action="/search/" class="col-12 col-lg-3 mb-lg-0">
+        <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarSupportedContent">
+            <div>
+            <form method="get" action="/search/" class="w-100 col-12 col-lg-3 mb-lg-0">
                 <input type="text" name="q" class="form-control rounded-pill" placeholder="Search..."
                     id="id_searchfield">
             </form>
-
-
+            </div>
+            {% if user.is_authenticated %}
+                <div class="dropdown">
+                  <a class="text-capitalize nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ user.username }}
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Subscription</a></li>
+                    <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                  </ul>
+                </div>
+            {% else %}
+                <ul class="navbar-nav justify-content-center">
+                    <li class="me-2">
+                        <a href="{% url 'account_login' %}" class="nav-link border-bottom border-dark text-dark">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'account_signup' %}" class=" text-primary nav-link border-bottom border-primary">Sign Up</a>
+                    </li>
+                </ul>
+            {% endif %}
         </div>
-
     </div>
 </nav>
